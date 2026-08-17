@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CycleHub - Premium Cycles</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        /* NAVBAR */
+
+        header {
+            width: 100%;
+            background: #ffffff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: auto;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #16a34a;
+        }
+
+        .logo span {
+            color: #111827;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #16a34a;
+        }
+
+        .cart {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart:hover {
+            background: #15803d;
+        }
+
+        /* HERO */
+
+        .hero {
+            max-width: 1200px;
+            margin: 35px auto;
+            min-height: 450px;
+            border-radius: 25px;
+            padding: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background:
+                linear-gradient(120deg, rgba(15, 23, 42, 0.95), rgba(22, 101, 52, 0.85)),
+                url("https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 550px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #4ade80;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #e5e7eb;
+            margin-bottom: 30px;
+        }
+
+        .shop-btn {
+            display: inline-block;
+            background: #22c55e;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .shop-btn:hover {
+            background: #16a34a;
+            transform: translateY(-2px);
+        }
+
+        /* CATEGORIES */
+
+        .section {
+            max-width: 1200px;
+            margin: 70px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 35px;
+            color: #111827;
+        }
+
+        .section-title p {
+            margin-top: 10px;
+            color: #6b7280;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .category {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .category:hover {
+            transform: translateY(-7px);
+        }
+
+        .category-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .category h3 {
+            margin-bottom: 8px;
+        }
+
+        .category p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* PRODUCTS */
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.07);
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image {
+            height: 230px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .product:hover img {
+            transform: scale(1.06);
+        }
+
+        .product-content {
+            padding: 22px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #15803d;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .rating {
+            color: #f59e0b;
+            margin-bottom: 15px;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            font-size: 23px;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .add-btn {
+            background: #111827;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .add-btn:hover {
+            background: #16a34a;
+        }
+
+        /* OFFER */
+
+        .offer {
+            max-width: 1200px;
+            margin: 70px auto;
+            padding: 45px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .offer h2 {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .offer p {
+            color: #dcfce7;
+        }
+
+        .offer-btn {
+            background: white;
+            color: #15803d;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111827;
+            color: white;
+            padding: 50px 20px 25px;
+            margin-top: 70px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+        }
+
+        .footer-logo {
+            font-size: 25px;
+            color: #4ade80;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            color: #9ca3af;
+            line-height: 1.7;
+        }
+
+        footer h3 {
+            margin-bottom: 15px;
+        }
+
+        footer ul {
+            list-style: none;
+        }
+
+        footer li {
+            margin-bottom: 10px;
+            color: #9ca3af;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero {
+                margin: 20px;
+                padding: 40px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .offer {
+                margin: 40px 20px;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            nav {
+                display: none;
+            }
+
+            .categories,
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: 500px;
+                padding: 30px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .offer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header>
+    <div class="navbar">
+
+        <div class="logo">
+            🚴 Cycle<span>Hub</span>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#categories">Categories</a>
+            <a href="#products">Cycles</a>
+            <a href="#offers">Offers</a>
+        </nav>
+
+        <button class="cart" onclick="showCart()">
+            🛒 Cart <span id="cartCount">0</span>
+        </button>
+
+    </div>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <h1>
+            Ride Beyond<br>
+            <span>Limits.</span>
+        </h1>
+
+        <p>
+            Discover premium bicycles designed for adventure,
+            fitness and everyday journeys. Find your perfect ride
+            at CycleHub.
+        </p>
+
+        <a href="#products" class="shop-btn">
+            Explore Cycles →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+
+<section class="section" id="categories">
+
+    <div class="section-title">
+        <h2>Explore Categories</h2>
+        <p>Choose the perfect cycle for your lifestyle</p>
+    </div>
+
+    <div class="categories">
+
+        <div class="category">
+            <div class="category-icon">🚵</div>
+            <h3>Mountain Bikes</h3>
+            <p>Built for rough trails and adventures</p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🚴</div>
+            <h3>Road Bikes</h3>
+            <p>Fast and lightweight performance bikes</p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🏙️</div>
+            <h3>City Bikes</h3>
+            <p>Perfect for daily city rides</p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">⚡</div>
+            <h3>Electric Bikes</h3>
+            <p>Smart and powerful electric rides</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section class="section" id="products">
+
+    <div class="section-title">
+
+        <h2>Popular Cycles</h2>
+
+        <p>
+            Premium bikes selected for every type of rider
+        </p>
+
+    </div>
+
+
+    <div class="products">
+
+        <!-- PRODUCT 1 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1576435728678-68d0fbf94e91?auto=format&fit=crop&w=800&q=80"
+                    alt="Mountain Bike">
+
+            </div>
+
+            <div class="product-content">
+
+                <span class="badge">
+                    BEST SELLER
+                </span>
+
+                <h3>
+                    Mountain Pro X1
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <div class="price-row">
+
+                    <div class="price">
+                        ₹24,999
+                    </div>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart('Mountain Pro X1')">
+
+                        Add +
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1502744688674-c619d1586c9e?auto=format&fit=crop&w=800&q=80"
+                    alt="Road Bike">
+
+            </div>
+
+            <div class="product-content">
+
+                <span class="badge">
+                    NEW
+                </span>
+
+                <h3>
+                    Speedster R5
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <div class="price-row">
+
+                    <div class="price">
+                        ₹32,499
+                    </div>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart('Speedster R5')">
+
+                        Add +
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1529422643029-d4585747aaf2?auto=format&fit=crop&w=800&q=80"
+                    alt="City Bike">
+
+            </div>
+
+            <div class="product-content">
+
+                <span class="badge">
+                    POPULAR
+                </span>
+
+                <h3>
+                    Urban Rider
+                </h3>
+
+                <div class="rating">
+                    ★★★★☆
+                </div>
+
+                <div class="price-row">
+
+                    <div class="price">
+                        ₹18,999
+                    </div>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart('Urban Rider')">
+
+                        Add +
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?auto=format&fit=crop&w=800&q=80"
+                    alt="Electric Bike">
+
+            </div>
+
+            <div class="product-content">
+
+                <span class="badge">
+                    ELECTRIC
+                </span>
+
+                <h3>
+                    Volt E-Bike
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <div class="price-row">
+
+                    <div class="price">
+                        ₹59,999
+                    </div>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart('Volt E-Bike')">
+
+                        Add +
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 5 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80"
+                    alt="Adventure Bike">
+
+            </div>
+
+            <div class="product-content">
+
+                <span class="badge">
+                    ADVENTURE
+                </span>
+
+                <h3>
+                    Trail Master
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <div class="price-row">
+
+                    <div class="price">
+                        ₹29,999
+                    </div>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart('Trail Master')">
+
+                        Add +
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 6 -->
+
+        <div class="product">
+
+            <div class="product-image">
+
+                <img
+                    src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=800&q=80"
+                    alt="Premium Bike">
+
+            </div>
+
+            <div class="product-content">
+
+                <span class="badge">
+                    PREMIUM
+                </span>
+
+                <h3>
+                    Carbon Elite
+                </h3>
+
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <div class="price-row">
+
+                    <div class="price">
+                        ₹74,999
+                    </div>
+
+                    <button
+                        class="add-btn"
+                        onclick="addToCart('Carbon Elite')">
+
+                        Add +
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- OFFER -->
+
+<section class="offer" id="offers">
+
+    <div>
+
+        <h2>
+            🚴 Summer Ride Sale
+        </h2>
+
+        <p>
+            Get up to 30% OFF on selected cycles.
+        </p>
+
+    </div>
+
+    <button
+        class="offer-btn"
+        onclick="claimOffer()">
+
+        Claim Offer
+
+    </button>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+
+            <div class="footer-logo">
+                🚴 CycleHub
+            </div>
+
+            <p>
+                Your trusted destination for premium bicycles,
+                cycling accessories and unforgettable rides.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>Quick Links</h3>
+
+            <ul>
+
+                <li>Home</li>
+                <li>Cycles</li>
+                <li>Categories</li>
+                <li>Offers</li>
+
+            </ul>
+
+        </div>
+
+
+        <div>
+
+            <h3>Contact</h3>
+
+            <ul>
+
+                <li>📧 support@cyclehub.com</li>
+                <li>📞 +91 98765 43210</li>
+                <li>📍 Tamil Nadu, India</li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 CycleHub. All Rights Reserved.
+
+    </div>
+
+</footer>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+    let cartCount = 0;
+
+
+    function addToCart(productName) {
+
+        cartCount++;
+
+        document.getElementById("cartCount").innerText = cartCount;
+
+        alert(productName + " added to your cart!");
+
+    }
+
+
+    function showCart() {
+
+        if (cartCount === 0) {
+
+            alert("Your cart is empty.");
+
+        } else {
+
+            alert(
+                "You have " +
+                cartCount +
+                " item(s) in your cart."
+            );
+
+        }
+
+    }
+
+
+    function claimOffer() {
+
+        alert(
+            "🎉 Offer claimed! Use code CYCLE30 at checkout."
+        );
+
+    }
+
+</script>
+
+</body>
+</html>
